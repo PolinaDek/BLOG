@@ -1,0 +1,18 @@
+# Включение mod_rewrite
+RewriteEngine On
+
+# Запрет доступа к папкам
+Options -Indexes
+
+# Защита от включения файлов
+<FilesMatch "\.(php|inc|tpl)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(index|post|login|register|profile)\.php$">
+    Allow from all
+</FilesMatch>
+
+# Красивые URL для статей (опционально)
+RewriteRule ^post/([0-9]+)/?$ post.php?id=$1 [L,QSA]
